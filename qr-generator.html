@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二维码生成器 - 宝岛红标鸡展示页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .url-input-group {
+            margin-bottom: 2rem;
+        }
+
+        .url-input-group label {
+            display: block;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .url-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        #qrcode {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            min-height: 150px;
+            align-items: center;
+        }
+
+        #qrcode canvas {
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .qr-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: left;
+        }
+
+        .qr-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .qr-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0.25rem 0;
+        }
+
+        .status-message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+                margin: 10px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                min-width: auto;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐔 宝岛红标鸡</h1>
+        <p class="description">
+            为您的产品展示页面生成二维码，方便用户扫码访问。
+        </p>
+
+        <div class="status-message" id="statusMessage"></div>
+
+        <div class="url-input-group">
+            <label for="urlInput">网站地址:</label>
+            <input
+                type="url"
+                id="urlInput"
+                class="url-input"
+                placeholder="请输入网站地址，例如: https://example.com"
+                value=""
+            >
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="generateQR()">生成二维码</button>
+            <button class="btn btn-secondary" onclick="useCurrentPage()">使用当前页面</button>
+            <button class="btn btn-success" onclick="downloadQR()">下载二维码</button>
+        </div>
+
+        <div id="qrcode">
+            <p style="color: #666;">请输入网址并点击"生成二维码"</p>
+        </div>
+
+        <div class="qr-info" id="qrInfo" style="display: none;">
+            <h3>二维码信息</h3>
+            <p><strong>网址:</strong> <span id="qrUrl">-</span></p>
+            <p><strong>生成时间:</strong> <span id="qrTime">-</span></p>
+            <p><strong>尺寸:</strong> 200x200 像素</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script>
+        let currentQRCanvas = null;
+
+        // 页面加载时设置默认URL
+        window.addEventListener('load', function() {
+            const indexUrl = window.location.href.replace('qr-generator.html', 'index.html');
+            document.getElementById('urlInput').value = indexUrl;
+        });
+
+        function showStatus(message, type = 'success') {
+            const statusElement = document.getElementById('statusMessage');
+            statusElement.textContent = message;
+            statusElement.className = `status-message status-${type}`;
+            statusElement.style.display = 'block';
+
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 3000);
+        }
+
+        function validateUrl(url) {
+            try {
+                new URL(url);
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+        function generateQR() {
+            const url = document.getElementById('urlInput').value.trim();
+            const qrContainer = document.getElementById('qrcode');
+
+            if (!url) {
+                showStatus('请输入网址', 'error');
+                return;
+            }
+
+            if (!validateUrl(url)) {
+                showStatus('请输入有效的网址格式', 'error');
+                return;
+            }
+
+            // 清空容器
+            qrContainer.innerHTML = '<p style="color: #666;">生成中...</p>';
+
+            // 生成二维码
+            QRCode.toCanvas(url, {
+                width: 200,
+                height: 200,
+                colorDark: '#2c3e50',
+                colorLight: '#ffffff',
+                margin: 2,
+                errorCorrectionLevel: 'M'
+            }, function(error, canvas) {
+                if (error) {
+                    console.error('二维码生成失败:', error);
+                    qrContainer.innerHTML = '<p style="color: #e74c3c;">二维码生成失败，请重试</p>';
+                    showStatus('二维码生成失败', 'error');
+                } else {
+                    qrContainer.innerHTML = '';
+                    qrContainer.appendChild(canvas);
+                    currentQRCanvas = canvas;
+
+                    // 显示二维码信息
+                    document.getElementById('qrUrl').textContent = url;
+                    document.getElementById('qrTime').textContent = new Date().toLocaleString();
+                    document.getElementById('qrInfo').style.display = 'block';
+
+                    showStatus('二维码生成成功！', 'success');
+                }
+            });
+        }
+
+        function useCurrentPage() {
+            const currentUrl = window.location.href.replace('qr-generator.html', 'index.html');
+            document.getElementById('urlInput').value = currentUrl;
+            generateQR();
+        }
+
+        function downloadQR() {
+            if (!currentQRCanvas) {
+                showStatus('请先生成二维码', 'error');
+                return;
+            }
+
+            try {
+                const link = document.createElement('a');
+                link.download = '宝岛红标鸡-二维码.png';
+                link.href = currentQRCanvas.toDataURL('image/png', 1.0);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                showStatus('二维码下载成功！', 'success');
+            } catch (error) {
+                console.error('下载失败:', error);
+                showStatus('下载失败，请重试', 'error');
+            }
+        }
+
+        // 回车键生成二维码
+        document.getElementById('urlInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateQR();
+            }
+        });
+
+        // 自动生成当前页面的二维码
+        setTimeout(() => {
+            useCurrentPage();
+        }, 500);
+    </script>
+</body>
+</html>

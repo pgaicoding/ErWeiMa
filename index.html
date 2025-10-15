@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝岛红标鸡 - 优质台湾鸡肉</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部区域 -->
+        <header class="header">
+            <div class="logo-section">
+                <h1 class="brand-title">宝岛红标鸡</h1>
+                <p class="brand-subtitle">优质台湾鸡肉，传承匠心品质</p>
+            </div>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 产品介绍滑动区域 -->
+            <div class="product-showcase">
+                <div class="slide-container" id="slideContainer">
+                    <!-- 第一页：品牌介绍 -->
+                    <div class="slide active">
+                        <div class="slide-content">
+                            <div class="slide-image">
+                                <div class="placeholder-image brand-intro">
+                                    <span>🐔</span>
+                                </div>
+                            </div>
+                            <div class="slide-text">
+                                <h2>品牌介绍</h2>
+                                <p>宝岛红标鸡源自台湾，秉承传统养殖工艺，坚持天然无添加的饲养方式。我们致力于为消费者提供最优质、最健康的鸡肉产品。</p>
+                                <ul class="feature-list">
+                                    <li>✓ 台湾原产地直供</li>
+                                    <li>✓ 无抗生素养殖</li>
+                                    <li>✓ 天然有机饲料</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第二页：产品特色 -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-image">
+                                <div class="placeholder-image product-features">
+                                    <span>🌟</span>
+                                </div>
+                            </div>
+                            <div class="slide-text">
+                                <h2>产品特色</h2>
+                                <p>红标鸡肉质鲜美，营养丰富，是家庭餐桌的首选。我们的鸡肉经过严格的品质控制，确保每一份都达到最高标准。</p>
+                                <div class="features-grid">
+                                    <div class="feature-item">
+                                        <h3>肉质鲜美</h3>
+                                        <p>肉质紧实，口感鲜嫩</p>
+                                    </div>
+                                    <div class="feature-item">
+                                        <h3>营养丰富</h3>
+                                        <p>高蛋白，低脂肪</p>
+                                    </div>
+                                    <div class="feature-item">
+                                        <h3>安全放心</h3>
+                                        <p>严格检测，品质保证</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第三页：养殖工艺 -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-image">
+                                <div class="placeholder-image farming-process">
+                                    <span>🌱</span>
+                                </div>
+                            </div>
+                            <div class="slide-text">
+                                <h2>养殖工艺</h2>
+                                <p>采用传统生态养殖模式，给鸡只提供充足的活动空间和天然的生长环境。</p>
+                                <div class="process-steps">
+                                    <div class="step">
+                                        <div class="step-number">1</div>
+                                        <h4>生态环境</h4>
+                                        <p>山林散养，自然生长</p>
+                                    </div>
+                                    <div class="step">
+                                        <div class="step-number">2</div>
+                                        <h4>天然饲料</h4>
+                                        <p>有机谷物，营养均衡</p>
+                                    </div>
+                                    <div class="step">
+                                        <div class="step-number">3</div>
+                                        <h4>严格检测</h4>
+                                        <p>多重检验，品质保障</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第四页：联系方式 -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-image">
+                                <div class="placeholder-image contact-info">
+                                    <span>📞</span>
+                                </div>
+                            </div>
+                            <div class="slide-text">
+                                <h2>联系我们</h2>
+                                <p>欢迎咨询订购，我们将为您提供最优质的服务和产品。</p>
+                                <div class="contact-details">
+                                    <div class="contact-item">
+                                        <strong>咨询热线：</strong>
+                                        <span>400-xxx-xxxx</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <strong>微信客服：</strong>
+                                        <span>bdhjg2024</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <strong>营业时间：</strong>
+                                        <span>周一至周日 8:00-20:00</span>
+                                    </div>
+                                </div>
+                                <div class="qr-section">
+                                    <p>扫码关注我们</p>
+                                    <div id="qrcode"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 导航点 -->
+                <div class="navigation-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                </div>
+
+                <!-- 滑动箭头 -->
+                <div class="slide-arrows">
+                    <button class="prev-btn" id="prevBtn">‹</button>
+                    <button class="next-btn" id="nextBtn">›</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- 底部 -->
+        <footer class="footer">
+            <p>&copy; 2024 宝岛红标鸡 版权所有</p>
+            <p>台湾优质鸡肉，传承匠心品质</p>
+        </footer>
+    </div>
+
+    <!-- 引入二维码生成库 -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
